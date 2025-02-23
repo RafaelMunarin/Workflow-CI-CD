@@ -1,5 +1,15 @@
-const sum = require('./sum');
+const { sumRandom, getRandomNumber } = require('./sum');
 
-test('soma 1 + 2 deve ser 3', () => {
-  expect(sum(1, 2)).toBe(3);
+describe("Testando a soma de números aleatórios", () => {
+    test("getRandomNumber deve gerar um número entre 0 e 99", () => {
+        const num = getRandomNumber();
+        expect(num).toBeGreaterThanOrEqual(0);
+        expect(num).toBeLessThanOrEqual(99);
+    });
+
+    test("sumRandom deve retornar um número válido", () => {
+        const resultado = sumRandom();
+        expect(typeof resultado).toBe("number");
+        expect(resultado).toBeGreaterThanOrEqual(0);
+    });
 });
