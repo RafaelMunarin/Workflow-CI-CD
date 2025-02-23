@@ -1,0 +1,49 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  install:
+    name: Instalar Dependências
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Instalar dependências
+        run: npm install
+
+  test:
+    name: Rodar Testes
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Instalar dependências
+        run: npm install
+      - name: Executar testes
+        run: npm test
+
+  deploy:
+    name: Simulação de Deploy
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+      - name: Exibir mensagem de deploy
+        run: echo "Deploy bem-sucedido (simulado)!"
